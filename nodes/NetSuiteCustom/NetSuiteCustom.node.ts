@@ -114,7 +114,8 @@ const makeNetSuiteRequest = async (
 	if (nextUrl) {
 		url = nextUrl;
 	} else {
-		url = `https://${credentials.hostname}/${path}`;
+		url = `https://${credentials.hostname}/${path?.replace(/^\//, '')}`;
+		// url = `https://${credentials.hostname}/${path}`;
 	}
 
 	// Get OAuth headers
