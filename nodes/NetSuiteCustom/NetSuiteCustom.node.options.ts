@@ -22,9 +22,25 @@ export const nodeDescription: INodeTypeDescription = {
 		{
 			name: 'netsuiteCustom',
 			required: true,
+			displayOptions: { show: { authentication: ['netsuiteCustom'] } },
+		},
+		{
+			name: 'netsuite',
+			required: true,
+			displayOptions: { show: { authentication: ['netsuite'] } },
 		},
 	],
 	properties: [
+		{
+			displayName: 'Authentication',
+			name: 'authentication',
+			type: 'options',
+			options: [
+				{ name: 'NetSuite Custom', value: 'netsuiteCustom' },
+				{ name: 'NetSuite (drowl87)', value: 'netsuite' },
+			],
+			default: 'netsuiteCustom',
+		},
 		{
 			displayName: 'Operation',
 			name: 'operation',
@@ -218,7 +234,7 @@ export const nodeDescription: INodeTypeDescription = {
 				{ name: 'Journal Entry', value: 'journalEntry' },
 				{ name: 'Message', value: 'message' },
 				{ name: 'Non-Inventory Sale Item', value: 'nonInventorySaleItem' },
-				{ name: 'Opportunity (BETA)', value: 'opportunity'},
+				{ name: 'Opportunity (BETA)', value: 'opportunity' },
 				{ name: 'Phone Call', value: 'phoneCall' },
 				{ name: 'Price Book', value: 'priceBook' },
 				{ name: 'Price Plan', value: 'pricePlan' },

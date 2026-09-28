@@ -88,7 +88,7 @@ const createOAuth = (credentials: INetSuiteCredentials) => {
 			const signature = sign(baseString);
 			oauthParams.oauth_signature = signature;
 
-			const authHeader = 'OAuth realm="' + credentials.accountId + '",' +
+			const authHeader = 'OAuth realm="' + credentials.accountId.toUpperCase() + '",' +
 				Object.keys(oauthParams)
 					.sort()
 					.map(key => `${percentEncode(key)}="${percentEncode(oauthParams[key])}"`)
@@ -135,7 +135,7 @@ const makeNetSuiteRequest = async (
 		if (requestType === NetSuiteRequestType.SuiteQL) {
 			body = { q: query };
 		} else if (typeof query === 'string') {
-    	sendJson = false;
+    		sendJson = false;
 		}	
 	}
 
@@ -477,7 +477,9 @@ export class NetSuiteCustom implements INodeType {
 	}
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const credentials: INetSuiteCredentials = (await this.getCredentials('netsuiteCustom')) as INetSuiteCredentials;
+		const authType = this.getNodeParameter('authentication', 0, 'netsuiteCustom') as string;
+		const credentials = (await this.getCredentials(authType)) as INetSuiteCredentials;
+		// const credentials: INetSuiteCredentials = (await this.getCredentials('netsuiteCustom')) as INetSuiteCredentials;
 		const operation = this.getNodeParameter('operation', 0) as string;
 		const items: INodeExecutionData[] = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
