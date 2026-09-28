@@ -1,4 +1,4 @@
-import {
+11import {
 	INodeTypeDescription,
 } from 'n8n-workflow';
 
