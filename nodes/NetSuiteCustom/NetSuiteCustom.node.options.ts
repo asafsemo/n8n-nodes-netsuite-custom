@@ -6,7 +6,7 @@ import {
  * Options to be displayed
  */
 export const nodeDescription: INodeTypeDescription = {
-	displayName: 'NetSuite Custom',
+	displayName: 'NetSuite Custom (FORKED)',
 	name: 'netsuiteCustom',
 	group: ['input'],
 	version: 1,
