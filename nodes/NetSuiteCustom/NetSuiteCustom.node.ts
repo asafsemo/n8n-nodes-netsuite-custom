@@ -129,13 +129,14 @@ const makeNetSuiteRequest = async (
 	};
 
 	// Build body
-	let body: any = undefined;
+	let body: any = query;
+	let sendJson = true;
 	if (query && !['GET', 'HEAD', 'OPTIONS'].includes(method)) {
 		if (requestType === NetSuiteRequestType.SuiteQL) {
 			body = { q: query };
-		} else {
-			body = typeof query === 'string' ? JSON.parse(query) : query;
-		}
+		} else if (typeof query === 'string') {
+    	sendJson = false;
+		}	
 	}
 
 	debug('makeNetSuiteRequest URL:', url);
@@ -149,7 +150,7 @@ const makeNetSuiteRequest = async (
 		body,
 		returnFullResponse: true,
 		ignoreHttpStatusErrors: true,
-		json: true,
+		json: sendJson,
 	});
 
 	return {
