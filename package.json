@@ -1,6 +1,6 @@
 {
   "name": "@asafsemo/n8n-nodes-netsuite-custom",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "n8n node for NetSuite using the REST API with Custom Headers Support",
   "license": "MIT",
   "homepage": "https://github.com/disruptive-learning/n8n-nodes-netsuite-custom",
