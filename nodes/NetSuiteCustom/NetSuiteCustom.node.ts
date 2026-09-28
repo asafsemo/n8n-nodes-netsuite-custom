@@ -467,6 +467,8 @@ export class NetSuiteCustom implements INodeType {
 			nodeContext.totalResults = respBody.totalResults;
 		}
 
+		respBody.test = "asaf";
+
 		if (nodeOptions.fullResponse) {
 			return {
 				json: {
