@@ -163,17 +163,6 @@ const makeNetSuiteRequest = async (
 			: response.body,
 		headers: response.headers,
 		request: { options: { method } },
-		aaa: {
-			requestOptions,
-			url,
-			oauth,
-			oauthHeaders,
-			headers,
-			body,
-			sendJson,
-			credentials,
-			customHeaders,
-		},
 	};
 };
 
@@ -477,8 +466,6 @@ export class NetSuiteCustom implements INodeType {
 			nodeContext.offset = respBody.offset;
 			nodeContext.totalResults = respBody.totalResults;
 		}
-
-		respBody.test = response?.aaa || "asaf1";
 
 		if (nodeOptions.fullResponse) {
 			return {
