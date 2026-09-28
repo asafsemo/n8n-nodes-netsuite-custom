@@ -48,14 +48,15 @@ const createOAuth = (credentials: INetSuiteCredentials) => {
 	};
 
 	const getBaseString = (method: string, url: string, params: Record<string, string>) => {
-		const sortedParams = Object.keys(params)
-			.sort()
-			.map(key => `${percentEncode(key)}=${percentEncode(params[key])}`)
+		const urlObj = new URL(url);
+		const allParams: Record<string, string> = { ...params };
+		urlObj.searchParams.forEach((value, key) => { allParams[key] = value; });
+
+		const sortedParams = Object.keys(allParams).sort()
+			.map(key => `${percentEncode(key)}=${percentEncode(allParams[key])}`)
 			.join('&');
 
-		const urlObj = new URL(url);
 		const baseUrl = `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}`;
-
 		return `${method.toUpperCase()}&${percentEncode(baseUrl)}&${percentEncode(sortedParams)}`;
 	};
 
@@ -135,8 +136,8 @@ const makeNetSuiteRequest = async (
 		if (requestType === NetSuiteRequestType.SuiteQL) {
 			body = { q: query };
 		} else if (typeof query === 'string') {
-    		sendJson = false;
-		}	
+			sendJson = false;
+		}
 	}
 
 	debug('makeNetSuiteRequest URL:', url);
@@ -156,7 +157,9 @@ const makeNetSuiteRequest = async (
 	return {
 		statusCode: response.statusCode,
 		statusText: response.statusCode >= 200 && response.statusCode < 300 ? 'OK' : 'Error',
-		body: response.body as any,
+		body: typeof response.body === 'string' && response.body
+			? JSON.parse(response.body)
+			: response.body,
 		headers: response.headers,
 		request: { options: { method } },
 	};
