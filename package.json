@@ -1,5 +1,5 @@
 {
-  "name": "n8n-nodes-netsuite-custom",
+  "name": "@asafsemo/n8n-nodes-netsuite-custom",
   "version": "1.0.0-ben",
   "description": "n8n node for NetSuite using the REST API with Custom Headers Support",
   "license": "MIT",
@@ -12,9 +12,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/disruptive-learning/n8n-nodes-netsuite-custom.git"
+    "url": "git+https://github.com/asafsemo/n8n-nodes-netsuite-custom.git"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc && gulp",
