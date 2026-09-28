@@ -93,7 +93,7 @@ const createOAuth = (credentials: INetSuiteCredentials) => {
 				Object.keys(oauthParams)
 					.sort()
 					.map(key => `${percentEncode(key)}="${percentEncode(oauthParams[key])}"`)
-					.join(',');
+					.join(', ');
 
 			return { Authorization: authHeader };
 		},
